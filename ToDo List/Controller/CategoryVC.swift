@@ -31,12 +31,9 @@ class CategoryVC: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return categoryArray.count
     }
-     
-    
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         cell.lableTxt.text = "\(categoryArray[indexPath.row].name)"
@@ -57,37 +54,6 @@ class CategoryVC: UITableViewController {
         return 80
     }
     
-    
-    
-    @IBAction func addCategory(_ sender: Any) {
-        let alert = UIAlertController(title: "Add Category", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { textfeild in
-            textfeild.placeholder = "Add Category"
-            self.textFeild = textfeild
-        }
-        
-        let action = UIAlertAction(title: "Add", style: .default) { action in
-            
-            let categoryname = Category()
-            categoryname.name = self.textFeild.text!
-            //self.categoryArray.append(categoryname)
-            
-            
-            try! self.realm.write {
-                self.realm.add(categoryname)
-            }
-            self.tableView.reloadData()
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .default,handler: nil)
-        
-        alert.addAction(cancel)
-        alert.addAction(action)
-        
-        present(alert, animated: true)
-        
-    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -126,8 +92,36 @@ class CategoryVC: UITableViewController {
     }
     
  
+    //MARK: - IBActions
     
-    
+    @IBAction func addCategory(_ sender: Any) {
+        let alert = UIAlertController(title: "Add Category", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { textfeild in
+            textfeild.placeholder = "Add Category"
+            self.textFeild = textfeild
+        }
+        
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+            
+            let categoryname = Category()
+            categoryname.name = self.textFeild.text!
+            
+            
+            try! self.realm.write {
+                self.realm.add(categoryname)
+            }
+            self.tableView.reloadData()
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default,handler: nil)
+        
+        alert.addAction(cancel)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+        
+    }
     
     // MARK: - Navigation
     

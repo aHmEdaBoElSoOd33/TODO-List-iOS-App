@@ -25,6 +25,7 @@ class ItemVC: UITableViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         title = category?.name
+        // realm file 
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 
@@ -32,7 +33,7 @@ class ItemVC: UITableViewController {
  
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+      
         return itemsArray.count
     }
 
@@ -73,10 +74,7 @@ class ItemVC: UITableViewController {
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
-        
-        
-        //itemsArray[indexPath.row] = item
-        //print(itemsArray)
+       
         
     }
     
@@ -131,10 +129,10 @@ class ItemVC: UITableViewController {
             
             var newItem = Item()
             newItem.name = self.textFeild.text!
-            //self.itemsArray.append(newItem)
+           
             
             try! self.realm.write {
-                //self.realm.add(newItem)
+                 
                 self.category?.Item.append(newItem)
             }
             self.tableView.reloadData()
@@ -148,15 +146,4 @@ class ItemVC: UITableViewController {
         present(alert, animated: true)
         
     }
-    
-    
- 
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-   
-}
