@@ -10,7 +10,7 @@ import RealmSwift
 
 
 class ItemVC: UITableViewController {
-
+    
     //MARK: - Variables
     
     var category : Category?{
@@ -25,20 +25,20 @@ class ItemVC: UITableViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         title = category?.name
-        // realm file 
+        // realm file
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
-
+    
     // MARK: - Table view data source
- 
-
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
+        
         return itemsArray.count
     }
-
     
-     
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
         
@@ -74,13 +74,13 @@ class ItemVC: UITableViewController {
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
-       
+        
         
     }
     
- 
     
-
+    
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         try! realm.write {
             let item = itemsArray[indexPath.row]
@@ -88,7 +88,7 @@ class ItemVC: UITableViewController {
         }
         tableView.reloadData()
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int
     {
         var numOfSections: Int = 0
@@ -129,10 +129,10 @@ class ItemVC: UITableViewController {
             
             var newItem = Item()
             newItem.name = self.textFeild.text!
-           
+            
             
             try! self.realm.write {
-                 
+                
                 self.category?.Item.append(newItem)
             }
             self.tableView.reloadData()
@@ -146,4 +146,5 @@ class ItemVC: UITableViewController {
         present(alert, animated: true)
         
     }
-
+    
+}
