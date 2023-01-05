@@ -8,7 +8,8 @@
 import UIKit
 
 class CategoryCell: UITableViewCell {
-
+    
+    @IBOutlet weak var cellContent: UIView!
     @IBOutlet weak var tasksCount: UILabel!
     @IBOutlet weak var lableTxt: UILabel!
     override func awakeFromNib() {

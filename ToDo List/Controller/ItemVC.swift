@@ -47,6 +47,15 @@ class ItemVC: UITableViewController {
         }else{
             cell.accessoryType = .none
         }
+        
+        cell.cellContent.layer.backgroundColor = UIColor.white.cgColor
+        cell.cellContent.layer.borderWidth = 0.1
+        cell.cellContent.layer.cornerRadius = 15
+        cell.cellContent.layer.shadowColor = UIColor.black.cgColor
+        cell.cellContent.layer.shadowOpacity = 0.7
+        cell.cellContent.layer.shadowOffset = .zero
+        cell.cellContent.layer.shadowRadius = 4
+        
         return cell
     }
     
@@ -95,13 +104,19 @@ class ItemVC: UITableViewController {
         {
             let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             noDataLabel.text          =  category!.name+" List Is Empty"
-            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textColor     = UIColor.lightGray
+            noDataLabel.font = .boldSystemFont(ofSize: 20)
             noDataLabel.textAlignment = .center
             tableView.backgroundView  = noDataLabel
             tableView.separatorStyle  = .none
         }
         return numOfSections
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     //MARK: - IBActions
     
     @IBAction func addItem(_ sender: Any) {

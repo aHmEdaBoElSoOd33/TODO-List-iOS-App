@@ -9,8 +9,11 @@ import UIKit
 import RealmSwift
 class CategoryVC: UITableViewController {
 
+    //MARK: - Variables
+    
     var categoryArray : Results<Category>!
     var textFeild = UITextField()
+    // Open the default realm.
     let realm = try! Realm()
     
     override func viewDidLoad() {
@@ -31,15 +34,28 @@ class CategoryVC: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return categoryArray.count
     }
+     
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         cell.lableTxt.text = "\(categoryArray[indexPath.row].name)"
         cell.tasksCount.text = "\(categoryArray[indexPath.row].Item.count)"
+        cell.cellContent.layer.backgroundColor = UIColor.white.cgColor
+        cell.cellContent.layer.borderWidth = 0.1
+        cell.cellContent.layer.cornerRadius = 15
+        cell.cellContent.layer.shadowColor = UIColor.black.cgColor
+        cell.cellContent.layer.shadowOpacity = 0.7
+        cell.cellContent.layer.shadowOffset = .zero
+        cell.cellContent.layer.shadowRadius = 4
+         
         return cell
     }
-   
+    
  
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     
     
@@ -97,9 +113,11 @@ class CategoryVC: UITableViewController {
         }
         else
         {
+            
             let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             noDataLabel.text          = "No data available"
-            noDataLabel.textColor     = UIColor.black
+            noDataLabel.font = .boldSystemFont(ofSize: 25)
+            noDataLabel.textColor     = UIColor.lightGray
             noDataLabel.textAlignment = .center
             tableView.backgroundView  = noDataLabel
             tableView.separatorStyle  = .none
